@@ -2,7 +2,6 @@ package com.blogapp.service;
 
 import com.blogapp.entity.Blog;
 import com.blogapp.repository.BlogRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

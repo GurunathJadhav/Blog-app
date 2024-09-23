@@ -12,11 +12,11 @@ import java.util.Optional;
 public class BlogService {
 
     private BlogRepository blogRepository;
-    private ModelMapper modelMapper;
 
-    public BlogService(BlogRepository blogRepository, ModelMapper modelMapper) {
+
+    public BlogService(BlogRepository blogRepository) {
         this.blogRepository = blogRepository;
-        this.modelMapper = modelMapper;
+
     }
 
     public Blog createBlog(Blog blog){
@@ -44,8 +44,11 @@ public class BlogService {
         Optional<Blog> oldBlog = blogRepository.findById(id);
         if(oldBlog.isPresent()){
             Blog blog1 = oldBlog.get();
-            Blog blog2 = mapToEntity(blog);
-            return blogRepository.save(blog2);
+            blog1.setContent(blog.getContent());
+            blog1.setAuthor(blog.getAuthor());
+            blog1.setTitle(blog.getTitle());
+            blog1.setDescription(blog.getDescription());
+            return blogRepository.save(blog1);
         }else{
             return null;
         }
@@ -62,8 +65,4 @@ public class BlogService {
         }
     }
 
-
-   private Blog mapToEntity(Blog blog){
-        return modelMapper.map(blog,Blog.class);
-    }
 }

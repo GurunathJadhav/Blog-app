@@ -44,7 +44,7 @@ public class BlogService {
         Optional<Blog> oldBlog = blogRepository.findById(id);
         if(oldBlog.isPresent()){
             Blog blog1 = oldBlog.get();
-            Blog blog2 = mapToEntity(blog1);
+            Blog blog2 = mapToEntity(blog);
             return blogRepository.save(blog2);
         }else{
             return null;
